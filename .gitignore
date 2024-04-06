@@ -1,4 +1,4 @@
-apps/
+/apps
 __pycache__/
 build/
 apps_list.py
