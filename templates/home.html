@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My homeHub - v{{ version }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
+    <script src="/assets/js/notifications.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/apps.js"></script>
+    <script src="/assets/js/core.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="/assets/js/winbox.bundle.min.js"></script>
+</head>
+<body oncontextmenu="return false;" style="color: black; background-color: white;">
+    <nav class="navbar navbar-expand-lg bg-{{ theme }} navbar-{{ theme }}">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="/assets/images/logo.png" width="40px">
+            homeHub <span class="badge bg-primary">v{{ version }}</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <ion-icon name="server"></ion-icon> Serveur
+                </a>
+                <ul class="dropdown-menu">
+                  <h4>Maintenance</h4>
+                  <li><a class="dropdown-item disabled" href="#" data-bs-toggle="modal" data-bs-target="#update"><ion-icon name="cloud-download"></ion-icon> Mise à jour de homeHub</a></li>
+                  <li><a class="dropdown-item disabled" href="#" data-bs-toggle="modal" data-bs-target="#restart"><ion-icon name="refresh-circle"></ion-icon> Rédémarrer l'hôte</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <h4>Sécurité</h4>
+                  <li><a class="dropdown-item disabled" href="#" data-bs-toggle="modal" data-bs-target="#firewall"><ion-icon name="shield"></ion-icon> Pare-feu</a></li>
+                  <li><a class="dropdown-item disabled" href="#"><ion-icon name="document-text"></ion-icon> Logs</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#warn-security"><ion-icon name="warning"></ion-icon> Avertissement important</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <h4>À propos</h4>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#specs"><ion-icon name="desktop"></ion-icon> Spécifications du serveur</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <ion-icon name="apps"></ion-icon> Applications
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#install-app"><ion-icon name="add-circle"></ion-icon> Installer une application</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#remove-app"><ion-icon name="remove-circle"></ion-icon> Désinstaller une application</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item disabled" href="#"><ion-icon name="help-circle"></ion-icon> Comment créer son application</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <ion-icon name="help-circle"></ion-icon> Aide
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="https://github.com/Luckyluka17/homeHub/wiki"><ion-icon name="information-circle"></ion-icon> Documentation</a></li>
+                  <li><a class="dropdown-item" href="https://github.com/Luckyluka17/homeHub"><ion-icon name="logo-github"></ion-icon> Dépôt Github</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="navbar-nav mb-0 mb-lg-0  top-0 end-10">
+                <a type="button" class="btn btn-primary position-relative" style="margin-right: 15px;" href="#" data-bs-toggle="modal" data-bs-target="#notifications">
+                    <ion-icon name="chatbox"></ion-icon> Notifications
+                    {{ notifs }}
+                </a>
+                <a type="button" class="btn btn-primary"  style="margin-right: 10px;" href="#" data-bs-toggle="modal" data-bs-target="#settings"><ion-icon name="settings"></ion-icon> Paramètres</a>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="header">
+        <h1><img src="https://em-content.zobj.net/source/apple/271/waving-hand_1f44b.png" width="35px"> Bonjour.</h1>
+        <p><ion-icon name="thermometer"></ion-icon> Température : {{ temp }} °C<br><ion-icon name="umbrella"></ion-icon> Humidité : {{ humidite }} %</p>
+      </div>
+      <h3 style="margin-left: 25px;"><ion-icon name="cube"></ion-icon> Vos applications</h3>
+      <div class="apps-container">
+        {{ apps|safe }}
+      </div>
+
+      <!-- MODALS -->
+      <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="settings"></ion-icon> Paramètres</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/applySettings" method="get">
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="disable_weather_on_home" name="disable_weather_on_home">
+                  <label class="form-check-label" for="disable_weather_on_home">Désactiver la météo dans l'accueil</label>
+                </div>
+                <p>Thème de l'application</p>
+                <select class="form-select" name="theme">
+                  <option value="light">Clair</option>
+                  <option value="dark">Somble</option>
+                </select>
+                <br/>
+                <button type="submit" class="btn btn-primary"><ion-icon name="checkbox"></ion-icon> Appliquer</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="install-app" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5"><ion-icon name="download"></ion-icon> Installer une application</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/installApp" method="get">
+              <div class="mb-3">
+                <label for="repo-link" class="form-label">Lien du dépôt de l'application (Github uniquement)</label>
+                <input type="text" class="form-control" id="repo-link" placeholder="https://github.com/homeHubOrg/Weather" name="link">
+              </div>
+              <p><ion-icon name="warning"></ion-icon> Installez uniquement des applications de confiance !</p>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary"><ion-icon name="download"></ion-icon> Installer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="remove-app" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5"><ion-icon name="trash-bin"></ion-icon> Désinstaller une application</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/removeApp" method="get">
+              <h4>Séléctionnez l'application à désinstaller</h4>
+              <select class="form-select" name="app">
+                {{ rmapps }}
+              </select>
+              <br/>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary"><ion-icon name="trash-bin"></ion-icon> Désinstaller</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="notifications" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="mail"></ion-icon> Notifications</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="notifications">
+                {{ notifications }}
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" onclick="removeAllNotification()"><ion-icon name="trash"></ion-icon> Effacer toutes les notifications</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="specs" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5"><ion-icon name="desktop"></ion-icon> Spécifications du serveur</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Nom du système d'exploitation : </strong> {{ osname }}<br>
+              <strong>Nombre de coeurs processeur : </strong> {{ cpucount }}<br>
+              <strong>Emplacement de l'application : </strong> <code>{{ cwd }}</code><br>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="update" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5"><ion-icon name="cloud-download"></ion-icon> Mise à jour de homeHub</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Vous êtes sur le point de mettre à jour homeHub. La mise à jour rénitialisera tous les paramètres, mais les applications seront sauvegardées.</p>
+            <h4>Version à installer</h4>
+            <select class="form-select">
+              <option value="1">1.0 <span class="badge bg-success">[Dernière version]</span></option>
+              <option value="2">0.9</option>
+              <option value="3">0.8</option>
+            </select>
+            <br/>
+            <h4>Système d'exploitation</h4>
+            <select class="form-select">
+              <option value="windows">Windows</option>
+              <option value="linux">Linux/Android</option>
+            </select>
+            <br/>
+            <button type="button" class="btn btn-primary"><ion-icon name="download"></ion-icon> Installer</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="modal fade" id="warn-security" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="warning"></ion-icon> Avertissement important</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Cette application a été conçu pour fonctionner sur un réseau local. Nous vous déconseillons fortement d'ouvrir vos ports pour la rendre publique. Nous ne disposons pas de test hors local.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- <div class="modal fade" id="appModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl" id="modFS">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="app_name">Application</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="app-container">
+            <div id="loading-app-screen" class="container" align="center">
+              <br/><br/>
+              <img src="/assets/images/logo.png" width="160px">
+              <br/><br/><br/>
+              <h2 id="loading-text">Un instant</h2>
+              <p><ion-icon name="hourglass"></ion-icon> L'application est en cours de démarrage, cela peut prendre jusqu'à une minute.<br>Si cela prends plus d'une minute, redémarrez l'application ouverte.</p>
+            </div>
+            <iframe src="/" width="100%" id="app_frame" height="700px"></iframe>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade" id="restart" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5"><ion-icon name="refresh-circle"></ion-icon> Rédémarrer l'hôte</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h4>Êtes vous sûr de redémarrer homeHub ?</h4>
+            <p>Un redémarrage prends environ 1 à 2 min. Effectuez le lorsque vous rencontrez des problèmes sur votre espace homeHub ou sur une applicaton spécifique.</p>
+            <br/>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" onclick="restart()"><ion-icon name="refresh-circle"></ion-icon> Redémarrer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="restartStatus" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5"><ion-icon name="refresh-circle"></ion-icon> Redémarrage en cours</h1>
+          </div>
+          <div class="modal-body">
+            <p>Merci de patienter, votre homeHub redémarre...</p>
+            <br/>
+            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal" href="/">Rafraichir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
